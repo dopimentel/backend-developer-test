@@ -1,0 +1,31 @@
+{
+  "name": "backend-developer-test",
+  "version": "1.0.0",
+  "description": "Job Posting API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dopimentel/backend-developer-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dopimentel/backend-developer-test/issues"
+  },
+  "homepage": "https://github.com/dopimentel/backend-developer-test#readme",
+  "dependencies": {
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-trybe-backend": "1.0.1"
+  }
+}

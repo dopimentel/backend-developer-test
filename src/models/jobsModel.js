@@ -37,11 +37,21 @@ const publish = async (id) => {
     return result.rows[0];
 };
 
+const update = async (id, job) => {
+    const { title, description, location } = job;
+    const result = await pool.query(
+        'UPDATE jobs SET title = $1, description = $2, location = $3 WHERE id = $4 RETURNING *',
+        [title, description, location, id],
+    );
+    return result.rows[0];
+};
+
 module.exports = {
     findAll,
     findByStatusWithCompanyName,
     create,
     publish,
+    update,
 };
 
 // create({ 

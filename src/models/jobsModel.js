@@ -46,12 +46,18 @@ const update = async (id, job) => {
     return result.rows[0];
 };
 
+const remove = async (id) => {
+    const result = await pool.query('DELETE FROM jobs WHERE id = $1 RETURNING *', [id]);
+    return result.rows[0];
+};
+
 module.exports = {
     findAll,
     findByStatusWithCompanyName,
     create,
     publish,
     update,
+    remove,
 };
 
 // create({ 

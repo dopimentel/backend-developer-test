@@ -53,9 +53,16 @@ const update = async (id, job) => {
     return { status: 'SUCCESSFUL', message: updatedJob };
 };
 
+const remove = async (id) => {
+    const job = await jobsModel.remove(id);
+    await sendMessageToSQS(job);
+    return { status: 'SUCCESSFUL', message: job };
+};
+
 module.exports = {
     findAll,
     create,
     publish,
     update,
+    remove,
 };

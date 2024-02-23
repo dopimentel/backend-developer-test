@@ -28,8 +28,18 @@ const update = async (req, res) => {
     return res.status(500).json({ message: serviceResponse.message });
     };
 
+const remove = async (req, res) => {
+    const { id } = req.params;
+    const serviceResponse = await jobsService.remove(id);
+    if (serviceResponse.status === 'SUCCESSFUL') {
+        return res.status(204).json(serviceResponse.message);
+    }
+    return res.status(500).json({ message: serviceResponse.message });
+    };
+
 module.exports = {
     create,
     publish,
     update,
+    remove,
 };

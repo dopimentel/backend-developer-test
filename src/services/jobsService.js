@@ -59,10 +59,17 @@ const remove = async (id) => {
     return { status: 'SUCCESSFUL', message: job };
 };
 
+const archive = async (id) => {
+    const job = await jobsModel.archive(id);
+    await sendMessageToSQS(job);
+    return { status: 'SUCCESSFUL', message: job };
+};
+
 module.exports = {
     findAll,
     create,
     publish,
     update,
     remove,
+    archive,
 };

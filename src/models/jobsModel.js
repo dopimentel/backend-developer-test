@@ -51,6 +51,12 @@ const remove = async (id) => {
     return result.rows[0];
 };
 
+const archive = async (id) => {
+    const result = await pool
+        .query('UPDATE jobs SET status = $1 WHERE id = $2 RETURNING *', ['archived', id]);
+    return result.rows[0];
+};
+
 module.exports = {
     findAll,
     findByStatusWithCompanyName,
@@ -58,6 +64,7 @@ module.exports = {
     publish,
     update,
     remove,
+    archive,
 };
 
 // create({ 

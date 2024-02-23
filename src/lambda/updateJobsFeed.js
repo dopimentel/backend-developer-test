@@ -3,13 +3,14 @@ const jobsModel = require('../models/jobsModel');
 
 aws.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS,
     region: process.env.AWS_REGION,
 });
 
 const s3 = new aws.S3();
 const S3_BUCKET = process.env.AWS_BUCKET_NAME;
 const FEED_FILE_KEY = 'data.json';
+console.log('S3_BUCKET:', S3_BUCKET);
 
 const handler = async (_event, _context) => {
     try {
@@ -27,5 +28,7 @@ const handler = async (_event, _context) => {
         return { statusCode: 500, body: 'Internal Server Error' };
     }
     };
+
+handler();
 
 module.exports = { handler };

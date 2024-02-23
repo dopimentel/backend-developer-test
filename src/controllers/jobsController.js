@@ -9,6 +9,16 @@ const create = async (req, res) => {
     return res.status(500).json({ message: serviceResponse.message });
     };
 
+const publish = async (req, res) => {
+    const { id } = req.params;
+    const serviceResponse = await jobsService.publish(id);
+    if (serviceResponse.status === 'SUCCESSFUL') {
+        return res.status(200).json(serviceResponse.message);
+    }
+    return res.status(500).json({ message: serviceResponse.message });
+    };
+
 module.exports = {
     create,
+    publish,
 };

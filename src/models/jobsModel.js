@@ -31,10 +31,17 @@ const create = async (job) => {
     return result.rows[0];
 };
 
+const publish = async (id) => {
+    const result = await pool
+        .query('UPDATE jobs SET status = $1 WHERE id = $2 RETURNING *', ['published', id]);
+    return result.rows[0];
+};
+
 module.exports = {
     findAll,
     findByStatusWithCompanyName,
     create,
+    publish,
 };
 
 // create({ 

@@ -4,6 +4,8 @@ const companiesRoutes = require('./routes/companies');
 const jobsRoutes = require('./routes/jobs');
 const feedRoutes = require('./routes/feed');
 
+require('express-async-errors');
+
 const app = express();
 
 app.use(express.json());
@@ -22,5 +24,10 @@ app.get('/', async (req, res) => {
 app.use('/companies', companiesRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/feed', feedRoutes);
+
+app.use((err, _req, res, _next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Erro interno do servidor' });
+  });
 
 module.exports = app;

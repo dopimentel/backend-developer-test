@@ -41,6 +41,12 @@ const create = async (job) => {
     return { status: 'SUCCESSFUL', message: newJob };
 };
 
+const publish = async (id) => {
+    const job = await jobsModel.publish(id);
+    await sendMessageToSQS(job);
+    return { status: 'SUCCESSFUL', message: job };
+};
+
 module.exports = {
     findAll,
     create,

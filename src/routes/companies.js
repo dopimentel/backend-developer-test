@@ -4,6 +4,6 @@ const router = express.Router();
 const companiesController = require('../controllers/companiesController');
 
 router.get('/', companiesController.findAll);
-router.get('/:company_id', companiesController.findById);
+router.get('/:id', companiesController.findById);
 
 module.exports = router;

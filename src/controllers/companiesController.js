@@ -5,11 +5,12 @@ const findAll = async (_req, res) => {
   if (serviceResponse.status === 'SUCCESSFUL') {
     return res.status(200).json(serviceResponse.message);
   }
-  return res.status(500).json({ message: serviceResponse.message });  
+  return res.status(500).json({ data: serviceResponse.message });  
 };
 
 const findById = async (req, res) => {
   const { id } = req.params;
+  console.log(req.params);
   const serviceResponse = await companiesService.findById(id);
   if (serviceResponse.status === 'SUCCESSFUL') {
     return res.status(200).json(serviceResponse.message);

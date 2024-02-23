@@ -1,6 +1,10 @@
 const pool = require('./db');
 
-const findAll = async () => {
+const findAll = async (status) => {
+    if (status) {
+        const result = await pool.query('SELECT * FROM jobs WHERE status = $1', [status]);
+        return result.rows;
+    }
     const result = await pool.query('SELECT * FROM jobs');
     return result.rows;
 };

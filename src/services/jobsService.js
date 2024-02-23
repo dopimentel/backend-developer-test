@@ -1,8 +1,13 @@
 const jobsModel = require('../models/jobsModel');
 const { sendMessageToSQS } = require('./sqsService');
 
-const findAll = async () => {
+const findAll = async (status) => {
+    if (status) {
+        const jobs = await jobsModel.findAll(status);
+        return { status: 'SUCCESSFUL', message: jobs };
+    }
     const jobs = await jobsModel.findAll();
+
     return { status: 'SUCCESSFUL', message: jobs };
 };
 

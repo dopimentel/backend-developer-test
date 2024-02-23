@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('./models/db');
 const companiesRoutes = require('./routes/companies');
+const jobsRoutes = require('./routes/jobs');
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/companies', companiesRoutes);
+app.use('/jobs', jobsRoutes);
 
 module.exports = app;

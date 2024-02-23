@@ -18,5 +18,5 @@ module.exports = {
 //     title: 'Desenvolvedor', 
 //     description: 'Vaga para desenvolvedor', 
 //     companyId: '535a0316-5530-40b9-80d3-3af4a8730a14', 
-//     location: 'São Paulo',
+//     location: 'São Paulo' 
 // });

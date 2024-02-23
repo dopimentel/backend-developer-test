@@ -21,7 +21,13 @@ const findAll = async (status) => {
     if (status === 'published') {
         console.log('Fetching from S3');
         const data = await s3.getObject(params).promise();
-        const jobs = JSON.parse(data.Body.toString('utf-8'));
+        const jsonString = data.Body.toString('utf-8');
+        if (!jsonString.trim()) {
+            console.error('Conteúdo do arquivo JSON está vazio ou inválido.');
+            return { status: 'ERROR', message: 'Conteúdo do arquivo JSON inválido.' };
+        }
+        const jobs = JSON.parse(jsonString);
+        
         return { status: 'SUCCESSFUL', message: jobs };
     }
     const jobs = await jobsModel.findAll();    

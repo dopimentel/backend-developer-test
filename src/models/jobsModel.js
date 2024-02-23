@@ -9,6 +9,18 @@ const findAll = async (status) => {
     return result.rows;
 };
 
+const findByStatusWithCompanyName = async (status) => {
+    const result = await pool.query(
+        'SELECT jobs.id, jobs.title, jobs.description, '
+        + 'companies.name AS company_name, jobs.created_at '
+        + 'FROM jobs '
+        + 'JOIN companies ON jobs.company_id = companies.id '
+        + 'WHERE jobs.status = $1',
+        [status],
+    );
+    return result.rows;
+};
+
 const create = async (job) => {
     const { title, description, companyId, location } = job;
     const result = await pool.query(
@@ -21,6 +33,7 @@ const create = async (job) => {
 
 module.exports = {
     findAll,
+    findByStatusWithCompanyName,
     create,
 };
 

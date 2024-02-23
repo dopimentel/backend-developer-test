@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('./models/db');
 const companiesRoutes = require('./routes/companies');
 const jobsRoutes = require('./routes/jobs');
+const feedRoutes = require('./routes/feed');
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.get('/', async (req, res) => {
 
 app.use('/companies', companiesRoutes);
 app.use('/jobs', jobsRoutes);
+app.use('/feed', feedRoutes);
 
 module.exports = app;

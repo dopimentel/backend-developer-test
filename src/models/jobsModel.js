@@ -1,5 +1,10 @@
 const pool = require('./db');
 
+const findAll = async () => {
+    const result = await pool.query('SELECT * FROM jobs');
+    return result.rows;
+};
+
 const create = async (job) => {
     const { title, description, companyId, location } = job;
     const result = await pool.query(
@@ -10,7 +15,8 @@ const create = async (job) => {
     return result.rows[0];
 };
 
-module.exports = { 
+module.exports = {
+    findAll,
     create,
 };
 

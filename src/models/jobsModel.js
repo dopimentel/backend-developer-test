@@ -3,8 +3,8 @@ const pool = require('./db');
 const create = async (job) => {
     const { title, description, companyId, location } = job;
     const result = await pool.query(
-        'INSERT INTO jobs (title, description, company_id, location) ' +
-        'VALUES ($1, $2, $3, $4) RETURNING *',
+        'INSERT INTO jobs (title, description, company_id, location) '
+        + 'VALUES ($1, $2, $3, $4) RETURNING *',
         [title, description, companyId, location],
     );
     return result.rows[0];

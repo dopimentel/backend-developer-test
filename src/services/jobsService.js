@@ -50,4 +50,5 @@ const publish = async (id) => {
 module.exports = {
     findAll,
     create,
+    publish,
 };

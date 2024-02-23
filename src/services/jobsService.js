@@ -4,7 +4,7 @@ const { sendMessageToSQS } = require('./sqsService');
 
 aws.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS,
     region: process.env.AWS_REGION,
 });
 
@@ -18,13 +18,13 @@ const params = {
 };
 
 const findAll = async (status) => {
-    if (status) {
-        const jobs = await jobsModel.findAll(status);
+    if (status === 'published') {
+        console.log('Fetching from S3');
+        const data = await s3.getObject(params).promise();
+        const jobs = JSON.parse(data.Body.toString('utf-8'));
         return { status: 'SUCCESSFUL', message: jobs };
     }
-    
-    const data = await s3.getObject(params).promise();
-    const jobs = JSON.parse(data.Body.toString('utf-8'));
+    const jobs = await jobsModel.findAll();    
 
     return { status: 'SUCCESSFUL', message: jobs };
 };

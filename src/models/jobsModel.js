@@ -53,8 +53,20 @@ const update = async (id, job) => {
 };
 
 const remove = async (id) => {
-    const result = await pool.query('DELETE FROM jobs WHERE id = $1 RETURNING *', [id]);
-    return result.rows[0];
+    const result = await pool.query(
+        'WITH deleted_job AS ('
+        + '  DELETE FROM jobs'
+        + '  WHERE id = $1 AND status = \'draft\''
+        + '  RETURNING *'
+        + ')'
+        + 'SELECT * FROM deleted_job;',
+        [id],
+    );
+
+    if (result.rows.length > 0) {
+        return result.rows[0];
+    } 
+        return null;
 };
 
 const archive = async (id) => {

@@ -58,6 +58,9 @@ const update = async (id, job) => {
 
 const remove = async (id) => {
     const job = await jobsModel.remove(id);
+    if (!job) {
+        return { status: 'CONFLICT', message: 'Job not found or already published' };
+    }
     await sendMessageToSQS(job);
     return { status: 'SUCCESSFUL', message: job };
 };

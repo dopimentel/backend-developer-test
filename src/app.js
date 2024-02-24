@@ -1,10 +1,9 @@
 const express = require('express');
+require('express-async-errors');
 const pool = require('./models/db');
 const companiesRoutes = require('./routes/companies');
 const jobsRoutes = require('./routes/jobs');
 const feedRoutes = require('./routes/feed');
-
-require('express-async-errors');
 
 const app = express();
 
@@ -25,9 +24,12 @@ app.use('/companies', companiesRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/feed', feedRoutes);
 
-app.use((err, _req, res, _next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Erro interno do servidor' });
-  });
+app.use((err, req, res, _next) => {
+  console.error(err.stack);
+  if (err.code && err.code.startsWith('22')) {
+    res.status(400).json({ error: 'Bad request - PostgreSQL input constraint violation' });
+  } 
+    res.status(500).json({ error: 'Internal Server Error' });
+});
 
 module.exports = app;

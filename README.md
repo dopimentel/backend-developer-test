@@ -17,7 +17,10 @@ NOTE: Docker is only required if you need a PostgreSQL 16 database
 2. **Acess the project root folder:**
    ```bash
    cd backend-developer-test
-
+   
+3. **Install the dependencies:**
+   ```bash
+   npm install
 
 ### ⚡ Running the Aplication
 

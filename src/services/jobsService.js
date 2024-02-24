@@ -14,7 +14,7 @@ const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 
 const params = {
   Bucket: process.env.AWS_BUCKET_NAME,
-  Key: 'data.json',
+  Key: process.env.FEED_FILE_KEY,
 };
 
 const findAll = async (status) => {

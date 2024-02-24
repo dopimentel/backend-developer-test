@@ -9,7 +9,7 @@ aws.config.update({
 
 const s3 = new aws.S3();
 const S3_BUCKET = process.env.AWS_BUCKET_NAME;
-const FEED_FILE_KEY = 'data.json';
+const { FEED_FILE_KEY } = process.env;
 console.log('S3_BUCKET:', S3_BUCKET);
 
 const handler = async (_event, _context) => {

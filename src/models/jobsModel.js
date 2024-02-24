@@ -70,9 +70,14 @@ const remove = async (id) => {
 };
 
 const archive = async (id) => {
-    const result = await pool
-        .query('UPDATE jobs SET status = $1 WHERE id = $2 RETURNING *', ['archived', id]);
-    return result.rows[0];
+    const result = await pool.query(
+        'UPDATE jobs SET status = $1 WHERE id = $2 AND status = $3 RETURNING *',
+        ['archived', id, 'published'],
+    );
+    if (result.rows.length > 0) {
+        return result.rows[0];
+    } 
+        return null;
 };
 
 module.exports = {

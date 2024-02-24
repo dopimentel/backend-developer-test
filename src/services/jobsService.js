@@ -67,6 +67,9 @@ const remove = async (id) => {
 
 const archive = async (id) => {
     const job = await jobsModel.archive(id);
+    if (!job) {
+        return { status: 'CONFLICT', message: 'Job not found or already archived' };
+    }
     await sendMessageToSQS(job);
     return { status: 'SUCCESSFUL', message: job };
 };

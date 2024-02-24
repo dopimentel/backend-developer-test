@@ -1,3 +1,71 @@
+## Getting Started
+### ⬇️ Pre-install
+Before you begin, ensure you have the following prerequisites installed:
+
+- [Node.js](https://nodejs.org/) (20.x): ```bash nvm use 20```
+- [Docker](https://www.docker.com/) (2.5 or higher): ```bash docker-compose --version```
+NOTE: Docker is only required if you need a PostgreSQL 16 database
+
+### ⬇️  Installation
+
+1. **Choose how to clone the Repository:**
+   ```bash
+   
+   # Clone using SSH
+   git clone git@github.com:dopimentel/backend-developer-test.git
+   
+2. **Acess the project root folder:**
+   ```bash
+   cd backend-developer-test
+
+
+### ⚡ Running the Aplication
+
+1. **Create a .env file in the project root with the necessary environment variables as exemplified in the .env.example file**
+2. **Run this command:**
+
+
+    ```bash
+    env $(cat .env) npm run dev
+    ```
+2. **You can now access the API at [`localhost:3000`](http://localhost:3000):**
+    
+### ⚡ Running the Aplication With Docker
+
+1. **Run this command to create a container with a PostgreSQL 16 database:**
+
+
+    ```bash
+    docker-compose up -d
+    ```
+
+2. **Create a .env file in the project root with the necessary environment variables as exemplified in the .env.example file. Use this variables to database (don't forget the AWS variables):**
+
+
+    ```bash
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=user
+    DB_PASSWORD=password
+    DB_DATABASE=jobpostingdb
+    PORT=3000
+    ```
+
+3. **Run this command:**
+
+
+    ```bash
+    env $(cat .env) npm run dev
+    ```
+4. **You can now access the API at [`localhost:3000`](http://localhost:3000):**
+
+5. **When you finished remove the container**:
+
+   ```bash
+    docker-compose down
+    ```
+
+
 # Backend Developer Technical Assessment
 
 ## Welcome!

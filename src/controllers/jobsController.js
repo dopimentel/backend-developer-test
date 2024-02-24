@@ -25,6 +25,9 @@ const update = async (req, res) => {
     if (serviceResponse.status === 'SUCCESSFUL') {
         return res.status(200).json(serviceResponse.message);
     }
+    if (serviceResponse.status === 'CONFLICT') {
+        return res.status(409).json({ message: serviceResponse.message });
+    }
     return res.status(500).json({ message: serviceResponse.message });
     };
 

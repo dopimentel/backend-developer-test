@@ -40,9 +40,15 @@ const publish = async (id) => {
 const update = async (id, job) => {
     const { title, description, location } = job;
     const result = await pool.query(
-        'UPDATE jobs SET title = $1, description = $2, location = $3 WHERE id = $4 RETURNING *',
-        [title, description, location, id],
+        'UPDATE jobs SET title = $1, description = $2, location = $3 '
+        + 'WHERE id = $4 AND status = $5 RETURNING *',
+        [title, description, location, id, 'draft'],
     );
+
+    if (result.rows.length === 0) {
+        return null;
+    }
+
     return result.rows[0];
 };
 

@@ -49,6 +49,9 @@ const publish = async (id) => {
 
 const update = async (id, job) => {
     const updatedJob = await jobsModel.update(id, job);
+    if (!updatedJob) {
+        return { status: 'CONFLICT', message: 'Job not found or already published' };
+    }
     await sendMessageToSQS(updatedJob);
     return { status: 'SUCCESSFUL', message: updatedJob };
 };
